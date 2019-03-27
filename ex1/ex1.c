@@ -9,6 +9,19 @@
 int main(void)
 {
     // Your code here
+    int pid = fork();
+
+
+    if (pid == 0){
+        for(int i = 0; i < 5; i++){
+            printf("I am a child");
+        }
+    }
+    else 
+    {
+        while(1);
+        printf("I am a parent");
+    }
 
     return 0;
 }
