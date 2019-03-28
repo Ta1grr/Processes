@@ -9,18 +9,24 @@
 int main(void)
 {
     // Your code here
+    int x = 3;
     int pid = fork();
 
-
-    if (pid == 0){
-        for(int i = 0; i < 5; i++){
-            printf("I am a child");
-        }
+    printf("x is current %d\n", x); // Print 3
+    
+    if (pid < 0){
+        fprintf(stderr, "fork failed\n" );
+        exit(1);
     }
-    else 
+    else if (pid == 0){
+        x = 5;
+        printf("I am a child and x is currently: %d\n", x); // Will print 5
+    }
+    else
     {
-        while(1);
-        printf("I am a parent");
+        int ppid = waitpid(pid, NULL, 0);
+        // x = 10;  // If I uncomment, this it'll print 10 for parent.
+        printf("I am a parent and x is currently: %d\n", x); // This will print out 3, since child is in a seperate instance.
     }
 
     return 0;
