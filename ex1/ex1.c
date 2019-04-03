@@ -15,7 +15,7 @@ int main(void)
     printf("x is current %d\n", x); // Print 3
     
     if (pid < 0){
-        fprintf(stderr, "fork failed\n" );
+        perror("fork failed\n");
         exit(1);
     }
     else if (pid == 0){

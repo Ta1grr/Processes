@@ -9,6 +9,20 @@
 int main(void)
 {
     // Your code here 
-    
+    FILE * openfile = fopen("text.txt", "r+");
+    int pid = fork();
+
+    if (pid < 0) {
+        perror("failed");
+    }
+    else if (pid == 0) {
+        fprintf(openfile, "%s %s\n", "Child", "Here!");
+    }
+    else {
+        fprintf(openfile, "%s %s\n", "Parent", "Here!");
+    }
+
+    // fclose(openfile);
+
     return 0;
 }
