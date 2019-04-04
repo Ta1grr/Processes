@@ -19,10 +19,11 @@ int main(void)
         fprintf(openfile, "%s %s\n", "Child", "Here!");
     }
     else {
+        wait(NULL);
         fprintf(openfile, "%s %s\n", "Parent", "Here!");
     }
 
-    // fclose(openfile);
+    fclose(openfile);
 
     return 0;
 }
