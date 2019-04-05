@@ -17,6 +17,26 @@ char* msg3 = "hello world #3";
 int main(void)
 {
     // Your code here
-    
+    char inbuf[MSGSIZE]; // a buffer that will hold the incoming data that is being written
+
+    int p[2]; // a two-element array to hold the read and write file descriptors that are used by the pipe
+
+    int pid = fork();
+
+    if (pid < 0) {
+        perror("fork");
+        exit(1);
+    }
+    else if(pid == 0) {
+        write(p[1], msg1, MSGSIZE);
+        write(p[1], msg2, MSGSIZE);
+        write(p[1], msg3, MSGSIZE);
+    }
+    else {
+        wait(NULL);
+        read(p[0], inbuf, MSGSIZE);
+        puts(inbuf);
+    }
+
     return 0;
 }

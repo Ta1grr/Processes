@@ -10,7 +10,21 @@
 
 int main(void)
 {
-    // Your code here    
+    // Your code here
+    int ret;    
+    int pid = fork();
+
+    if (pid < 0) {
+        perror("fork");
+    }
+    else if (pid == 0) {
+        // using execl
+        ret = execl("/bin/ls", "ls", "-1", '\0');
+        printf("%d", ret);
+    }
+    else{
+        wait(NULL);
+    }
 
     return 0;
 }
